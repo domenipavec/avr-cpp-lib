@@ -19,7 +19,7 @@ namespace avr_cpp_lib {
 	};
 	
 	struct set_mask {
-		set_mask():mask(0){}
+		set_mask():mask(0), port(0){}
 		uint8_t volatile * port;
 		uint8_t mask;
 	};

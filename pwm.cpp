@@ -32,9 +32,15 @@ void avr_cpp_lib::pwm_worker::set_output(pwm_channel * const c) {
 
 void avr_cpp_lib::pwm_worker::update_set_mask(pwm_channel * const c) {
 	for (uint8_t x = 0; x < NUM_PORTS; x++) {
-		if (cm[x].port == c->port) {
+		if (cm[x].port != 0) {
+			cm[x].port = c->port;
 			SETBIT(cm[x].mask, c->channel);
 			break;
+		} else {
+			if (cm[x].port == c->port) {
+				SETBIT(cm[x].mask, c->channel);
+				break;
+			}
 		}
 	}
 }
