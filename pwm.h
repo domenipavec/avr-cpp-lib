@@ -17,11 +17,11 @@ namespace avr_cpp_lib {
 
 	class pwm_worker {
 		public:
-			pwm_worker(pwm_channel *, uint8_t (* const f)());
+			pwm_worker(pwm_channel *, uint8_t (* const )());
 			void cycle();
 			
 		private:
-			set_output(pwm_channel * const);
+			void set_output(pwm_channel * const);
 			pwm_channel * const data;
 			uint8_t latest;
 			uint8_t (* const get_i)();

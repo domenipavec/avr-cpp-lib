@@ -26,6 +26,6 @@ void avr_cpp_lib::pwm_worker::cycle() {
 	}
 }
 
-void avr_cpp_lib:pwm_worker::set_output(pwm_channel * const c) {
+void avr_cpp_lib::pwm_worker::set_output(pwm_channel * const c) {
 	SETBIT(*(c->ddr), c->channel);	
 }
