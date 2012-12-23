@@ -6,7 +6,10 @@
 
 avr_cpp_lib::pwm_worker::pwm_worker(pwm_channel * d, uint8_t (* const f)()) 
 	:data(d), latest(255), get_i(f) {
-
+	
+	for (pwm_channel * x = data; x->channel == 255; x++) {
+		set_output(x);
+	}
 }
 
 void avr_cpp_lib::pwm_worker::cycle() {
@@ -21,4 +24,8 @@ void avr_cpp_lib::pwm_worker::cycle() {
 			}
 		}
 	}
+}
+
+void avr_cpp_lib:pwm_worker::set_output(pwm_channel * const c) {
+	SETBIT(*(c->ddr), c->channel);	
 }

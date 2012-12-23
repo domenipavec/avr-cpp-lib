@@ -9,6 +9,7 @@
 namespace avr_cpp_lib {
 
 	struct pwm_channel {
+		uint8_t volatile * const ddr;
 		uint8_t volatile * const port;
 		uint8_t const channel;
 		uint8_t volatile value;
@@ -20,6 +21,7 @@ namespace avr_cpp_lib {
 			void cycle();
 			
 		private:
+			set_output(pwm_channel * const);
 			pwm_channel * const data;
 			uint8_t latest;
 			uint8_t (* const get_i)();
