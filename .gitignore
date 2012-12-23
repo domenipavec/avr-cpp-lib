@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+# Compiled avr stuff
+*.out
+*.out.map
+*.lst
