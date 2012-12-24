@@ -18,13 +18,6 @@ namespace avr_cpp_lib {
 		uint8_t volatile value;
 	};
 	
-	struct set_mask {
-		set_mask():port(0),mask(0){}
-		
-		uint8_t volatile * port;
-		uint8_t mask;
-	};
-
 	class pwm_worker {
 	
 		public:
@@ -33,11 +26,9 @@ namespace avr_cpp_lib {
 			
 		private:
 			void set_output(pwm_channel * const);
-			void update_set_mask(pwm_channel * const);
 			void set_all();
 			
 			pwm_channel * const data;
-			set_mask cm[NUM_PORTS];
 	};
 }
 
