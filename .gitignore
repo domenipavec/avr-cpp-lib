@@ -16,3 +16,6 @@
 *.out
 *.out.map
 *.lst
+
+# documentation
+docs
