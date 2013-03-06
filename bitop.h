@@ -35,7 +35,7 @@
  */
 
 /*!
- * Returns binary representation of n-th bit.
+ * Returns binary mask of n-th bit.
  * Example: 2 --> 0100b
  * \param n Number of bit.
  */
@@ -44,16 +44,23 @@
 /*!
  * Sets bits in x, that are set in y.
  * \param x Variable.
- * \param y Binary representation of bits to set in x.
+ * \param y Binary mask of bits to set in x.
  */
 #define SETBITS(x,y) ((x) |= (y))
 
 /*!
  * Clear bits in x, that are set in y.
  * \param x Variable.
- * \param y Binary representation of bits to clear in x.
+ * \param y Binary mask of bits to clear in x.
  */ 
 #define CLEARBITS(x,y) ((x) &= (~(y)))
+
+/*!
+ * Toggle bits in x, that are set in y.
+ * \param x Variable.
+ * \param y Binary mask of bits to toggle in x.
+ */
+#define TOGGLEBITS(x,y) ((x) ^= (y))
 
 /*!
  * Set n-th bit in x.
@@ -68,6 +75,13 @@
  * \param n Number of bit to clear.
  */
 #define CLEARBIT(x,n) (CLEARBITS((x), BIT((n))))
+
+/*!
+ * Toggle n-th bit in x.
+ * \param x Variable.
+ * \param n Number of bit to toggle.
+ */
+#define TOGGLEBIT(x,n) (TOGGLEBITS((x), BIT((n))))
 
 /*!
  * Check if n-th bit in x is set.
@@ -86,14 +100,14 @@
 /*!
  * Check if bits set in y are also set in x.
  * \param x Variable.
- * \param y Binary representation of bits to check.
+ * \param y Binary mask of bits to check.
  */
 #define BITSSET(x,y) (((x) & (y)) == (y))
 
 /*!
  * Check if bits set in y are clear in x.
  * \param x Variable.
- * \param y Binary representation of bits to check.
+ * \param y Binary mask of bits to check.
  */
 #define BITSCLEAR(x,y) (((x) & (y)) == 0)
 
