@@ -1,0 +1,13 @@
+/*!
+\mainpage avr-cpp-lib Documentation
+
+avr-cpp-lib consist of a few modules. To check them out, go to  <a 
+href="modules.html">Modules</a> tab. For more info about avr-cpp-lib read below.
+
+README:
+\verbinclude README.md
+
+License: 
+\verbinclude license.txt
+
+*/
