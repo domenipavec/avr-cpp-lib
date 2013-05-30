@@ -25,6 +25,7 @@
  */
 
 #include "pid.h"
+
 avr_cpp_lib::Pid::Pid(int16_t p, int16_t i, int16_t d, int16_t min, int16_t max)
 	: sumError(0), lastProcessValue(0),
 	  P_Factor(p), I_Factor(i), D_Factor(d),
@@ -33,19 +34,11 @@ avr_cpp_lib::Pid::Pid(int16_t p, int16_t i, int16_t d, int16_t min, int16_t max)
 	
 }
 
-void avr_cpp_lib::Pid::setSetPoint(int16_t *sp) {
-	this->setPoint = sp;
-}
-
-void avr_cpp_lib::Pid::resetIntegrator() {
-	this->sumError = 0;
-}
-
-int16_t avr_cpp_lib::Pid::controller(int16_t processValue) {
-	int16_t error, p_term, d_term;
+int16_t avr_cpp_lib::Pid::controller(PidData pd) {
+	int16_t error, p_term;
 	int32_t i_term, ret, temp;
 
-	error = *(this->setPoint) - processValue;
+	error = pd.setPoint - pd.processValue;
 	
 	// Calculate Pterm and limit error overflow
 	if (error > this->maxError) {
@@ -60,7 +53,7 @@ int16_t avr_cpp_lib::Pid::controller(int16_t processValue) {
 	temp = this->sumError + error;
 	if (temp > this->maxSumError) {
 		i_term = MAX_I_TERM;
-		this->sumError = maxSumError;
+		this->sumError = this->maxSumError;
 	} else if (temp < -this->maxSumError) {
 		i_term = -MAX_I_TERM;
 		this->sumError = -this->maxSumError;
@@ -69,15 +62,15 @@ int16_t avr_cpp_lib::Pid::controller(int16_t processValue) {
 		i_term = this->I_Factor * this->sumError;
 	}
 	
-	// Calculate Dterm
-	d_term = this->D_Factor * (this->lastProcessValue - processValue);
-	this->lastProcessValue = processValue;
+	// Calculate d-term and combine
+	ret = (p_term + i_term + this->D_Factor * (this->lastProcessValue - pd.processValue)) / SCALING_FACTOR;
 
-	ret = (p_term + i_term + d_term) / SCALING_FACTOR;
+	this->lastProcessValue = pd.processValue;
 	if (ret > this->maxRet) {
-		ret = this->maxRet;
-	} else if (ret < this->minRet) {
-		ret = this->minRet;
+		return this->maxRet;
+	}
+	if (ret < this->minRet) {
+		return this->minRet;
 	}
 
 	return ((int16_t)ret);

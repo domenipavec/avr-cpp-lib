@@ -26,32 +26,38 @@
 #ifndef PID_H
 #define PID_H
 
+#define __STDC_LIMIT_MACROS
 #include <stdint.h>
 
 namespace avr_cpp_lib {
+	struct PidData {
+		int16_t processValue;
+		int16_t setPoint;
+	};
+
 	class Pid {
 	public:
 		Pid(int16_t p, int16_t i, int16_t d, int16_t min, int16_t max);
-		int16_t controller(int16_t processValue);
-		void setSetPoint(int16_t *sp);
-		void resetIntegrator();
+		int16_t controller(PidData pd);
+		inline void resetIntegrator() {
+			this->sumError = 0;
+		}
 
 	private:
 		int16_t lastProcessValue;
 		int32_t sumError;
-		int16_t P_Factor;
-		int16_t I_Factor;
-		int16_t D_Factor;
-		int16_t maxError;
-		int32_t maxSumError;
-		int16_t minRet;
-		int16_t maxRet;
-		int16_t *setPoint;
+		const int16_t P_Factor;
+		const int16_t I_Factor;
+		const int16_t D_Factor;
+		const int16_t maxError;
+		const int16_t maxRet;
+		const int16_t minRet;
+		const int32_t maxSumError;
 
-		const int16_t SCALING_FACTOR = 128;
-		const int16_t MAX_INT = INT16_MAX;
-		const int32_t MAX_LONG = INT32_MAX;
-		const int32_t MAX_I_TERM = (MAX_LONG / 2);
+		static const int16_t SCALING_FACTOR = 128;
+		static const int16_t MAX_INT = INT16_MAX;
+		static const int32_t MAX_LONG = INT32_MAX;
+		static const int32_t MAX_I_TERM = (MAX_LONG / 2);
 	};
 }
 
