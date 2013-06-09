@@ -63,7 +63,7 @@ int16_t avr_cpp_lib::Pid::controller(PidData pd) {
 	}
 	
 	// Calculate d-term and combine
-	ret = (p_term + i_term + this->D_Factor * (this->lastProcessValue - pd.processValue)) / SCALING_FACTOR;
+	ret = (p_term + i_term + this->D_Factor * (this->lastProcessValue - pd.processValue)) >> SCALING_FACTOR;
 
 	this->lastProcessValue = pd.processValue;
 	if (ret > this->maxRet) {

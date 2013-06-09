@@ -54,7 +54,7 @@ namespace avr_cpp_lib {
 		const int16_t minRet;
 		const int32_t maxSumError;
 
-		static const int16_t SCALING_FACTOR = 128;
+		static const int16_t SCALING_FACTOR = 7;
 		static const int16_t MAX_INT = INT16_MAX;
 		static const int32_t MAX_LONG = INT32_MAX;
 		static const int32_t MAX_I_TERM = (MAX_LONG / 2);
