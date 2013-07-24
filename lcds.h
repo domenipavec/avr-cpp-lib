@@ -46,12 +46,12 @@ namespace avr_cpp_lib {
 		static const uint8_t HOME = (1<<1);
 		static const uint8_t CURSOR_ON = 0b00001110;
 		static const uint8_t CURSOR_ON_BLINK = 0b00001111;
-		static const uint8_t CURSOR_BLINK = 0B00001101;
-		static const uint8_t CURSOR_OFF = 0x0b00001100;
+		static const uint8_t CURSOR_BLINK = 0b00001101;
+		static const uint8_t CURSOR_OFF = 0b00001100;
 		static const uint8_t CURSOR_LEFT = 0b00010000;
 		static const uint8_t CURSOR_RIGHT = 0b00010100;
 		static const uint8_t DISPLAY_ON = 0b00001100;
-		static const uint8_t DISPLAY_OFF = 0B00001000;
+		static const uint8_t DISPLAY_OFF = 0b00001000;
 		static const uint8_t DISPLAY_RIGHT = 0b00011100;
 		static const uint8_t DISPLAY_LEFT = 0b00011000;
 	private:
