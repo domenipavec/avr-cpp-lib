@@ -27,6 +27,7 @@
 #include "shiftOut.h"
 
 #include "io.h"
+#include "bitop.h"
 
 avr_cpp_lib::shiftOut(OutputPin * dataOut, OutputPin * clock, uint8_t bits) {
 	for (uint8_t i = 0; i < 8; i++) {
