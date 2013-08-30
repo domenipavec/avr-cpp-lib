@@ -26,6 +26,8 @@
 #ifndef BITTOP_H
 #define BITTOP_H
 
+#include <stdint.h>
+
 /*!
  * \defgroup Bitop 
  * \brief A few useful macros for setting, clearing, checking, ... bit(s).
@@ -39,7 +41,7 @@
  * Example: 2 --> 0100b
  * \param n Number of bit.
  */
-#define BIT(n) (1 << (n))
+#define BIT(n) (((uint32_t)1) << (n))
 
 /*!
  * Sets bits in x, that are set in y.
