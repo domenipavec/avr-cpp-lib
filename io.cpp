@@ -27,19 +27,30 @@
 #include "io.h"
 #include "bitop.h"
 
-avr_cpp_lib::OutputPin::OutputPin(uint8_t volatile * const ddr, uint8_t volatile * const port, uint8_t const value)
+using namespace avr_cpp_lib;
+
+OutputPin::OutputPin(uint8_t volatile * const ddr, uint8_t volatile * const port, uint8_t const value)
 	:port(port), value(value) {
 	SETBIT(*ddr, value);	
 }
 
-void avr_cpp_lib::OutputPin::set() {
+void OutputPin::set() {
 	SETBIT(*port, value);
 }
 
-void avr_cpp_lib::OutputPin::clear() {
+void OutputPin::clear() {
 	CLEARBIT(*port, value);
 }
 
-void avr_cpp_lib::OutputPin::toggle() {
+void OutputPin::toggle() {
 	TOGGLEBIT(*port, value);
+}
+
+InputPin::InputPin(uint8_t volatile * const ddr, uint8_t const volatile * const pin, uint8_t const value)
+	:pin(pin), value(value) {
+	CLEARBIT(*ddr, value);
+}
+
+bool InputPin::isSet() {
+	return BITSET(*pin, value);
 }

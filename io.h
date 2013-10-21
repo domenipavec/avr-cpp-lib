@@ -41,6 +41,14 @@ namespace avr_cpp_lib {
 		uint8_t const value;
 	};
 
+	class InputPin {
+	public:
+		InputPin(uint8_t volatile * const ddr, uint8_t const volatile * const pin, uint8_t const value);
+		bool isSet();
+	private:
+		uint8_t const volatile * const pin;
+		uint8_t const value;
+	}
 }
 
 #endif

@@ -26,12 +26,20 @@
 
 #include "cc1101.h"
 
+#include <delay.h>
+
 using namespace avr_cpp_lib;
 
-CC1101::CC1101(transceive_t t)
-: transceive(t) {
+CC1101::CC1101(transceive_t t, OutputPin csn, InputPin so)
+: transceive(t), CSn(csn), SO(so) {
 }
 
 void CC1101::reset() {
-
+	CSn.clear();
+	CSn.set();
+	__delay_us(40);
+	CSn.clear();
+	while (SO.isSet());
+	command(SRES);
+	while (SO.isSet());
 }

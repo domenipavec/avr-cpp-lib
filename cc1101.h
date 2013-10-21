@@ -1,5 +1,5 @@
 /* File: cc1101.h
- * Interface to transceiver cc1101.
+ * Interface to transceiver cc1101. All comunication is synchronous.
  */
 /* Copyright (c) 2012-2013 Domen Ipavec (domen.ipavec@z-v.si)
  *
@@ -28,16 +28,26 @@
 
 #include <stdint.h>
 
+#include "io.h"
+
 namespace avr_cpp_lib {
 
 	typedef uint8_t (*transceive_t)(const uint8_t &);
 
 	class CC1101 {
 	public:
-		CC1101(transceive_t t);
+		CC1101(transceive_t t, OutputPin csn, InputPin so);
 		void reset();
+		inline void command(uint8_t & address) { transceive(address); }
 	private:
 		transceive_t transceive;
+		OutputPin CSn;
+		InputPin SO;
+
+		// constants
+		const uint8_t READ = 0x80;
+		const uint8_t BURST = 0x40;
+		const uint8_t SRES = 0x30;
 	};
 
 }
