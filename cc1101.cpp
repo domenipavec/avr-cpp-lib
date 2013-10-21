@@ -26,7 +26,7 @@
 
 #include "cc1101.h"
 
-#include <delay.h>
+#include <util/delay.h>
 
 using namespace avr_cpp_lib;
 
