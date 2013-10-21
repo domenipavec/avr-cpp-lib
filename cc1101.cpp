@@ -37,7 +37,7 @@ CC1101::CC1101(transceive_t t, OutputPin csn, InputPin so)
 void CC1101::reset() {
 	CSn.clear();
 	CSn.set();
-	__delay_us(40);
+	_delay_us(40);
 	CSn.clear();
 	while (SO.isSet());
 	command(SRES);

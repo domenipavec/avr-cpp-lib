@@ -48,7 +48,7 @@ namespace avr_cpp_lib {
 	private:
 		uint8_t const volatile * const pin;
 		uint8_t const value;
-	}
+	};
 }
 
 #endif

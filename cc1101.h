@@ -38,16 +38,16 @@ namespace avr_cpp_lib {
 	public:
 		CC1101(transceive_t t, OutputPin csn, InputPin so);
 		void reset();
-		inline void command(uint8_t & address) { transceive(address); }
+		inline void command(const uint8_t & address) { transceive(address); }
 	private:
 		transceive_t transceive;
 		OutputPin CSn;
 		InputPin SO;
 
 		// constants
-		const uint8_t READ = 0x80;
-		const uint8_t BURST = 0x40;
-		const uint8_t SRES = 0x30;
+		static const uint8_t READ = 0x80;
+		static const uint8_t BURST = 0x40;
+		static const uint8_t SRES = 0x30;
 	};
 
 }
