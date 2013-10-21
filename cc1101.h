@@ -47,6 +47,7 @@ namespace avr_cpp_lib {
 		// constants
 		static const uint8_t READ = 0x80;
 		static const uint8_t BURST = 0x40;
+	public:
 		static const uint8_t SRES = 0x30;
 	};
 
