@@ -35,7 +35,7 @@ namespace avr_cpp_lib {
 	class CC1101 {
 	public:
 		CC1101(transceive_t t);
-		reset();
+		void reset();
 	private:
 		transceive_t transceive;
 	};
