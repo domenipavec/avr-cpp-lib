@@ -32,13 +32,13 @@
 
 namespace avr_cpp_lib {
 
-	typedef uint8_t (*transceive_t)(const uint8_t &);
+	typedef uint8_t (*transceive_t)(const uint8_t);
 
 	class CC1101 {
 	public:
 		CC1101(transceive_t t, OutputPin csn, InputPin so);
 		void reset();
-		inline void command(const uint8_t & address) { transceive(address); }
+		inline void command(const uint8_t address) { transceive(address); }
 	private:
 		transceive_t transceive;
 		OutputPin CSn;
