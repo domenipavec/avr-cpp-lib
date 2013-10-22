@@ -32,6 +32,7 @@ using namespace avr_cpp_lib;
 
 CC1101::CC1101(transceive_t t, OutputPin csn, InputPin so)
 : transceive(t), CSn(csn), SO(so) {
+	CSn.set();
 }
 
 void CC1101::reset() {
@@ -42,4 +43,45 @@ void CC1101::reset() {
 	while (SO.isSet());
 	command(SRES);
 	while (SO.isSet());
+}
+
+void CC1101::command(const uint8_t address) {
+	CSn.clear();
+	transceive(address);	
+	CSn.set();
+}
+
+void CC1101::write(const uint8_t address, const uint8_t data) {
+	CSn.clear();
+	transceive(address);
+	transceive(data);
+	CSn.set();
+}
+
+void CC1101::writeBurst(const uint8_t address, const uint8_t * data, uint8_t n) {
+	CSn.clear();
+	transceive(address | BURST);
+	for (; n > 0; n--) {
+		transceive(*data);
+		data++;
+	}
+	CSn.set();
+}
+
+uint8_t CC1101::read(const uint8_t address) {
+	CSn.clear();
+	transceive(address | READ);
+	uint8_t tmp = transceive(0);
+	CSn.set();
+	return tmp;
+}
+
+void CC1101::readBurst(const uint8_t address, uint8_t * data, uint8_t n) {
+	CSn.clear();
+	transceive(address | READ | BURST);
+	for (; n > 0; n--) {
+		*data = transceive(0);
+		data++;
+	}
+	CSn.set();
 }
