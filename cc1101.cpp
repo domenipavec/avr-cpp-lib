@@ -41,7 +41,7 @@ void CC1101::reset() {
 	_delay_us(40);
 	CSn.clear();
 	while (SO.isSet());
-	command(SRES);
+	transceive(SRES);
 	while (SO.isSet());
 }
 
