@@ -43,6 +43,7 @@ void CC1101::reset() {
 	while (SO.isSet());
 	transceive(SRES);
 	while (SO.isSet());
+	CSn.set();
 }
 
 void CC1101::command(const uint8_t address) {
