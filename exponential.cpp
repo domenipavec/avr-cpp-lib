@@ -33,5 +33,5 @@ static const uint8_t exponential_table[] PROGMEM = {
 };
 
 uint8_t avr_cpp_lib::exponential(uint8_t l) {
-	return pgm_read_byte(&exponential_table[ADCH]);
+	return pgm_read_byte(&exponential_table[l]);
 }
