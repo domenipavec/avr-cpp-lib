@@ -36,5 +36,6 @@
 
 uint32_t get_random32();
 uint32_t get_random32(uint32_t); // iz intervala [0, M-1]
+uint32_t get_random_gauss(uint32_t max);
 
 #endif
