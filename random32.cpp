@@ -41,9 +41,10 @@ uint32_t get_random32(uint32_t max) {
 }
 
 uint32_t get_random_gauss(uint32_t max) {
+	max /= 6;
 	uint32_t result = 0;
-	for (uint8_t i = 0; i < 8; i++) {
-		result += get_random32(max >> 3);
+	for (uint8_t i = 0; i < 6; i++) {
+		result += get_random32(max);
 	}
 	return result;
 }
