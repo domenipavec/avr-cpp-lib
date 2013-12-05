@@ -24,6 +24,8 @@
  * SOFTWARE.
  */
 
+#include "exponential.h"
+
 #include <avr/pgmspace.h>
 
 static const uint8_t exponential_table[] PROGMEM = {
