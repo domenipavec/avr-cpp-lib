@@ -52,6 +52,8 @@ void avr_cpp_lib::pwm_worker::turn_all_on() {
 	for (pwm_channel * x = data; x->channel != PWM_CHANNEL_END_VALUE; x++) {
 		if (x->value != 0) {
 			SETBIT(*(x->port), x->channel);
+		} else {
+			CLEARBIT(*(x->port), x->channel);
 		}
 	}
 }
