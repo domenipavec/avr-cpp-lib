@@ -53,6 +53,9 @@ avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, O
 
 	// turn display on, cursor off
 	command(DISPLAY_ON);
+	
+	// clear display
+	command(CLEAR);
 }
 
 void avr_cpp_lib::LCDS::enableToggle() {
@@ -65,7 +68,7 @@ void avr_cpp_lib::LCDS::enableToggle() {
 void avr_cpp_lib::LCDS::command(uint8_t c) {
 	rs.clear();
 	send(c);
-	_delay_ms(2);
+	_delay_ms(5);
 }
 
 void avr_cpp_lib::LCDS::character(uint8_t c) {
