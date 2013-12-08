@@ -27,6 +27,10 @@
 #include "lcds.h"
 #include "bitop.h"
 
+#ifndef F_CPU
+	#define F_CPU 8000000UL  // 8 MHz
+#endif
+
 #include <util/delay.h>
 #include <avr/pgmspace.h>
 
@@ -60,15 +64,15 @@ avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, O
 
 void avr_cpp_lib::LCDS::enableToggle() {
 	e.set();
-	_delay_ms(1);
+	_delay_us(1);
 	e.clear();
-	_delay_ms(1);
+	_delay_us(1);
 }
 
 void avr_cpp_lib::LCDS::command(uint8_t c) {
 	rs.clear();
 	send(c);
-	_delay_ms(5);
+	_delay_ms(2);
 }
 
 void avr_cpp_lib::LCDS::character(uint8_t c) {
