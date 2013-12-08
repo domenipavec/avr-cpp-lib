@@ -65,6 +65,7 @@ void avr_cpp_lib::LCDS::enableToggle() {
 void avr_cpp_lib::LCDS::command(uint8_t c) {
 	rs.clear();
 	send(c);
+	_delay_ms(2);
 }
 
 void avr_cpp_lib::LCDS::character(uint8_t c) {
