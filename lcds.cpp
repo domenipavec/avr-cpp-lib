@@ -36,6 +36,8 @@
 
 avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, OutputPin d6, OutputPin d7)
 	: rs(rs), e(e), d4(d4), d5(d5), d6(d6), d7(d7) {
+	_delay_ms(16);
+	
 	d7.clear();
 	d6.clear();
 	d5.set();
@@ -44,9 +46,11 @@ avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, O
 	
 	// one (8 bit mode)
 	enableToggle();
+	_delay_ms(5);
 
 	// two (8 bit mode)
 	enableToggle();
+	_delay_ms(1);
 
 	// three (4 bit mode)
 	d4.clear();
