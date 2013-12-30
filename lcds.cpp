@@ -36,7 +36,7 @@
 
 avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, OutputPin d6, OutputPin d7)
 	: rs(rs), e(e), d4(d4), d5(d5), d6(d6), d7(d7) {
-	_delay_ms(16);
+	_delay_ms(50);
 	
 	d7.clear();
 	d6.clear();
@@ -46,15 +46,16 @@ avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, O
 	
 	// one (8 bit mode)
 	enableToggle();
-	_delay_ms(5);
+	_delay_ms(4.5);
 
 	// two (8 bit mode)
 	enableToggle();
-	_delay_ms(1);
+	_delay_ms(4.5);
 
 	// three (4 bit mode)
 	d4.clear();
 	enableToggle();
+	_delay_us(150);
 
 	// dual line, 4 bit mode
 	command(0b00101000);
@@ -67,16 +68,20 @@ avr_cpp_lib::LCDS::LCDS(OutputPin rs, OutputPin e, OutputPin d4, OutputPin d5, O
 }
 
 void avr_cpp_lib::LCDS::enableToggle() {
+	e.clear();
+	_delay_us(1);
 	e.set();
 	_delay_us(1);
 	e.clear();
-	_delay_us(1);
+	_delay_us(100);
 }
 
 void avr_cpp_lib::LCDS::command(uint8_t c) {
 	rs.clear();
 	send(c);
-	_delay_ms(2);
+	if (c < 4) { // clear (0b1) and home (0b10)
+		_delay_ms(2);
+	}
 }
 
 void avr_cpp_lib::LCDS::character(uint8_t c) {
