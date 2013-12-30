@@ -27,10 +27,6 @@
 #include "lcds.h"
 #include "bitop.h"
 
-#ifndef F_CPU
-	#define F_CPU 8000000UL  // 8 MHz
-#endif
-
 #include <util/delay.h>
 #include <avr/pgmspace.h>
 
