@@ -28,12 +28,9 @@
 
 #include <stdint.h>
 
-// choose this randomly
-#define M32_W 1357
-#define M32_Z 7531
-
 #define RANDOM32_MAX 4294967295u
 
+void init_random32(uint32_t seed = 0xDEADBEEFul);
 uint32_t get_random32();
 uint32_t get_random32(uint32_t); // iz intervala [0, M-1]
 uint32_t get_random_gauss(uint32_t max);
